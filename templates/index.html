@@ -1,1 +1,191 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Thryve Virtual Doctor</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
 
+<div id="chat-container">
+    <div id="chat"></div>
+    <div id="form-container" style="display: none;"></div>
+</div>
+
+<script>
+    // Function to display the form
+    function displayForm(formFields) {
+        var formHtml = '<form id="user-form">';
+        for (var i = 0; i < formFields.length; i++) {
+            formHtml += '<label>' + formFields[i].label + ': </label>';
+            formHtml += '<input type="' + formFields[i].type + '" name="' + formFields[i].name + '" required><br>';
+        }
+        formHtml += '<button type="button" onclick="submitForm()">Submit</button>';
+        formHtml += '</form>';
+        $('#form-container').html(formHtml);
+        $('#form-container').show();
+    }
+
+    // Function to send the form data to the server
+    function submitForm() {
+        var formData = $('#user-form').serialize();
+        $.ajax({
+            type: 'POST',
+            url: '/recommend',
+            data: formData,
+            success: function(response) {
+                // Display the bot's response
+                $('#chat').append('<div>Bot: ' + response + '</div>');
+                // Hide the form after submission
+                $('#form-container').hide();
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+
+    // Function to initiate the conversation
+    function initiateConversation() {
+        $('#chat').append('<div>Bot: Hello! I am Mr. Thryve, your virtual first aid doctor. To assist you better, please fill out the following form:</div>');
+        
+        // Define the form fields
+        var formFields = [
+            { label: 'Age', type: 'text', name: 'age' },
+            { label: 'Symptoms', type: 'text', name: 'symptoms' },
+            { label: 'Gender', type: 'text', name: 'gender' },
+            { label: 'Medical History', type: 'text', name: 'medical_history' },
+            { label: 'Location', type: 'text', name: 'location' },
+            { label: 'Allergies', type: 'text', name: 'allergies' }
+        ];
+
+        // Display the form
+        displayForm(formFields);
+    }
+
+    // Initiate the conversation when the page loads
+    $(document).ready(function() {
+        initiateConversation();
+    });
+</script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Thryve Virtual Doctor</title>
+    <style>
+        #chat-container {
+            width: 60%;
+            margin: auto;
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #chat {
+            margin-bottom: 20px;
+        }
+
+        #form-container {
+            display: none;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+<div id="chat-container">
+    <div id="chat"></div>
+    <div id="form-container"></div>
+</div>
+
+<script>
+    function simulateTyping(message, delay) {
+        $('#chat').append('<div>Bot: ' + message + '</div>');
+        setTimeout(function () {
+            $('#form-container').show();
+        }, 500);  // Delay before displaying the form
+    }
+
+    function displayForm(formFields) {
+        var formHtml = '<form id="user-form">';
+        for (var i = 0; i < formFields.length; i++) {
+            formHtml += '<label>' + formFields[i].label + ': </label>';
+            formHtml += '<input type="' + formFields[i].type + '" name="' + formFields[i].name + '" required><br>';
+        }
+        formHtml += '<button type="button" onclick="submitForm()">Submit</button>';
+        formHtml += '</form>';
+        $('#form-container').html(formHtml);
+    }
+
+    function submitForm() {
+        var formData = $('#user-form').serialize();
+        $.ajax({
+            type: 'POST',
+            url: '/recommend',
+            data: formData,
+            success: function(response) {
+                $('#chat').append('<div>Bot: ' + response + '</div>');
+                $('#form-container').hide();
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        simulateTyping('Hello! I am Mr. Thryve, your virtual first aid doctor. To assist you better, please fill out the following form:', 50);
+
+        var formFields = [
+            { label: 'Age', type: 'text', name: 'age' },
+            { label: 'Symptoms', type: 'text', name: 'symptoms' },
+            { label: 'Gender', type: 'text', name: 'gender' },
+            { label: 'Medical History', type: 'text', name: 'medical_history' },
+            { label: 'Location', type: 'text', name: 'location' },
+            { label: 'Allergies', type: 'text', name: 'allergies' }
+        ];
+
+        setTimeout(function() {
+            displayForm(formFields);
+        }, 2000);  // Adjust the delay as needed
+    });
+</script>
+
+</body>
+</html>

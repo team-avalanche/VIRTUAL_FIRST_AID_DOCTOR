@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+    
+        p{
+            background-color: #e1eee1;
+            color: #333;
+            padding: 10px;
+            margin: 0;
+        }
+    
+        #diseases, #medicines, #dos, #donts {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px;
+            padding: 15px;
+        }
+    
+        h3 {
+            color: #5fe06a;
+        }
+    
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+    
+        li {
+            margin-bottom: 8px;
+        }
+        #chat-container {
+        width: 60%; /* Adjust the width as needed */
+        margin: auto;
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    </style>
+    
+</head>
+<body>
+    <div id="chat-container">
+        <p>According to Your response , i feel you have these recommendations :-</p>
+        <div id="diseases">
+            <h3>Symptoms Matching Diseases:</h3>
+            <ul>
+                {% for disease in diseases %}
+                    <li>{{ disease }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div id="medicines">
+            <h3>Medicines for Initial Relief before Meeting Doctor:</h3>
+            <ul>
+                {% for medicine in first_aid_medicines %}
+                    <li>{{ medicine }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div id="dos">
+            <h3>Do's Before Meeting Doctor:</h3>
+            <ul>
+                {% for do in dos_before_meeting %}
+                    <li>{{ do }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div id="donts">
+            <h3>Don'ts Before Meeting Doctor:</h3>
+            <ul>
+                {% for dont in donts_before_meeting %}
+                    <li>{{ dont }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+</body>
+</html>
